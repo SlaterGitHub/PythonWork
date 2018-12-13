@@ -1,0 +1,3 @@
+title=Vibrate Program
+author=Ryan
+orientation=portrait
