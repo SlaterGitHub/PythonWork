@@ -26,7 +26,8 @@ def show_frame():
         front += 1
         back += 1
     else:
-        frames[front] = frame
+        frames[front] = [frame]
+        back += 1
     img = Image.fromarray(cv2image)
     imgtk = ImageTk.PhotoImage(image=img)
     lmain.imgtk = imgtk
@@ -43,4 +44,6 @@ back = 0
 
 show_frame()
 window.mainloop()
+for x in range(len(frames)):
+    frames[x] =(np.fromstring(lz4.frame.decompress(frames[x]), dtype = "uint8"))
 print(frames)
