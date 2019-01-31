@@ -11,16 +11,18 @@ sleep(1)
 
 while True:
     ret, frame = video.read()
-    size1 = frame.size()
+    print(frame)
+    """size1 = frame.size()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     size2 = frame.size()
     image = lz4.frame.compress(frame)
     size3 = len(image)
+    """
     cv2.imshow("output", frame)
-
+    """
     print(size1)
     print(size2)
-    print(size3)
+    print(size3)"""
 
     key = cv2.waitKey(1) & 0xFF
 

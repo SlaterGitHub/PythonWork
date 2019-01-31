@@ -14,7 +14,7 @@ time = None
 row = None
 data = None
 
-data = open("SortTimes.txt", "r").readlines()
+data = open("C:\\Users\\Ryan\\Documents\\GitHub\\PythonWork\\SortTimes.txt", "r").readlines()
 
 for x in range(len(data)):
     time, row = data[x].split(',')
@@ -24,7 +24,7 @@ for x in range(len(data)):
     row = int(row)
     rows.append(row)
 
-vectorX = [rows[0], rows[(len(rows)/2)], rows[len(rows)-1]]
+"""vectorX = [rows[0], rows[(len(rows)/2)], rows[len(rows)-1]]
 vectorY = [times[0], times[(len(times)/2)], times[len(times)-1]]
 
 for g in range(5000):
@@ -32,12 +32,9 @@ for g in range(5000):
     vx2, vy2 = Vector(vectorX[1], vectorX[2], vectorY[1], vectorY[2], g)
     v1, v2 = Vector(vx1, vx2, vy1, vy2, g)
     Rline.append(v1)
-    Tline.append(v2)
+    Tline.append(v2)"""
 
 plt.plot(rows, times, 'o')
 #plt.plot(Rline, Tline)
 
 plt.show()
-
-    
-

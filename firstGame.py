@@ -27,7 +27,7 @@ def starLoc():
     return loc
 
 def makeMap(loc):
-    """indx = 0
+    indx = 0
     print(axis[0])
     print(axis[1])
     print(axis[2])
@@ -35,7 +35,7 @@ def makeMap(loc):
     for x in range(axis[0]):
         for y in range(axis[1]):
             pygame.draw.rect(Dis, cluster[indx], (y+axis[2], x+axis[3], 1, 1))
-            indx+=1"""
+            indx+=1
 
     indx = 0
 
