@@ -1,33 +1,20 @@
 import cv2
-import lz4.frame
-import lz4.block
-from time import sleep
+import CameraCompression as CC
+import ImageDecompress as ID
 
-video = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0)
 
-sleep(1)
+ret, image = cam.read()
 
-def compressUntil(size, image):
-    if (len(image) <= size):
-        return image
-    image = lz4.block.compress(image)
-    print(len(image))
-    compressUntil(size, image)
+cam.release()
 
-while True:
-    ret, frame = video.read()
-    size1 = frame.size
-    image = lz4.frame.compress(frame)
-    size3 = len(image)
-    image = compressUntil(430000, image)
-    size4 = len(image)
-    cv2.imshow("output", frame)
-    print(size1)
-    print(size3)
-    print(size4)
-    #sleep(1)
+file, rows = CC.compress(image)
 
-    key = cv2.waitKey(1) & 0xFF
+cv2.imshow("frame", image)
+cv2.waitKey(0)
 
-    if key == ord('q'):
-        break
+image = ID.decompress(file, rows)
+print(image.shape)
+
+cv2.imshow("frame", image)
+cv2.waitKey(0)
