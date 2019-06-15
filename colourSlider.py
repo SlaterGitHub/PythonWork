@@ -33,7 +33,7 @@ sleep(0.2)
 
 while True:
     ret, frame = video.read()
-    frame = cv2.resize(frame, (80, 60), interpolation = cv2.INTER_AREA)
+    frame = cv2.resize(frame, (160, 120), interpolation = cv2.INTER_AREA)
     w, h = frame.shape[:2]
     for x in range(h):
         for y in range(w):

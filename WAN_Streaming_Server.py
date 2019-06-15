@@ -8,8 +8,8 @@ y = 240
 i = True
 
 host = '192.168.0.14'
-host = '172.23.5.114'
-port = 5000
+#host = '172.23.5.114'
+port = 6666
 #host = 'localhost'
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,13 +34,13 @@ def getText(i):
             s.close()
             port += 50
             return True
-            
+
 while True:
     if i == True:
         i = connect(i)
     elif i == False:
         i = getText(i)
-        
+
 
 """def recvImg(s):
     frame = recvall(s)
