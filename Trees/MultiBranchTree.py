@@ -19,6 +19,16 @@ class tree:
             return
         self.addNode(path, node, currentNode.branches[branchToGo])
 
+    def searchTree(self, searchType, nodeToFind):
+        if printType == "breadth":
+            return self.breadthSearch(nodeToFind, self.node, [])
+        else:
+            return self.depthSearch()
+
+    def breadthSearch(self, nodeToFind, currentNode, path):
+        path += currentNode.content
+
+
     def pathLocation(self, path, branches):
         x = 0
         while(x < len(branches)):
@@ -29,8 +39,8 @@ class tree:
             return -1
         return x
 
-    def printTree(self, searchType):
-        if searchType == "breadth":
+    def printTree(self, printType):
+        if printType == "breadth":
             return self.breadthPrint(self.node, [])
         else:
             return self.depthPrint(self.node, [])
