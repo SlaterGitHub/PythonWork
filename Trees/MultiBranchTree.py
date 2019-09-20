@@ -12,7 +12,6 @@ class Queue:
 
     def enQueue(self, item):
         self.nodesToVisit.append(item)
-        print(self.returnQueue())
 
     def QueueSize(self):
         return len(self.nodesToVisit)
