@@ -99,6 +99,7 @@ class tree:
 folders = tree("Documents")
 folders.addNode("Documents", "Pictures", None)
 folders.addNode("Documents Pictures", "Photo", None)
+folders.addNode("Documents Pictures Photo", "PeePee", None)
 folders.addNode("Documents", "Music", None)
 folders.addNode("Documents", "Code", None)
 folders.addNode("Documents Code", "PythonCode", None)
