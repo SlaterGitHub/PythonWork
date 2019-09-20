@@ -20,14 +20,23 @@ class tree:
         self.addNode(path, node, currentNode.branches[branchToGo])
 
     def searchTree(self, searchType, nodeToFind):
-        if printType == "breadth":
+        if searchType == "breadth":
             return self.breadthSearch(nodeToFind, self.node, [])
         else:
-            return self.depthSearch()
+            return self.depthSearch(nodeToFind, self.node, [])
 
-    def breadthSearch(self, nodeToFind, currentNode, path):
-        path += currentNode.content
-
+    def depthSearch(self, nodeToFind, currentNode, path):
+        path.append(currentNode.content)
+        if currentNode.content == nodeToFind:
+            return True, path
+        nodeFound = False
+        x = 0
+        while((x < len(currentNode.branches)) and (nodeFound == False)):
+            nodeFound, path = self.depthSearch(nodeToFind, currentNode.branches[x], path)
+            if nodeFound == False:
+                del path[-1]
+            x+=1
+        return nodeFound, path
 
     def pathLocation(self, path, branches):
         x = 0
@@ -61,8 +70,10 @@ class tree:
 
 folders = tree("Documents")
 folders.addNode("Documents", "Pictures", None)
+folders.addNode("Documents Pictures", "Photo", None)
 folders.addNode("Documents", "Music", None)
 folders.addNode("Documents", "Code", None)
 folders.addNode("Documents Code", "PythonCode", None)
-print(folders.printTree("depth"))
-print(folders.printTree("breadth"))
+#print(folders.printTree("depth"))
+#print(folders.printTree("breadth"))
+nodeFound , path = folders.searchTree("depth", "Code")
