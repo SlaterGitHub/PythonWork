@@ -3,6 +3,26 @@ class Node:
         self.branches = []
         self.content = node
 
+class Queue:
+    def __init__(self):
+        self.nodesToVisit = []
+
+    def deQueue(self):
+        return self.nodesToVisit.pop(0)
+
+    def enQueue(self, item):
+        self.nodesToVisit.append(item)
+        print(self.returnQueue())
+
+    def QueueSize(self):
+        return len(self.nodesToVisit)
+
+    def returnQueue(self):
+        nodes = []
+        for x in range(len(self.nodesToVisit)):
+            nodes.append(self.nodesToVisit[x].content)
+        return nodes
+
 class tree:
     def __init__(self, node):
         self.node = Node(node)
@@ -50,7 +70,11 @@ class tree:
 
     def printTree(self, printType):
         if printType == "breadth":
-            return self.breadthPrint(self.node, [])
+            toVisit = Queue()
+            toVisit.enQueue(self.node)
+            nodes =  self.breadthPrint(toVisit, [])
+            nodes.insert(0, self.node.content)
+            return nodes
         else:
             return self.depthPrint(self.node, [])
 
@@ -60,13 +84,18 @@ class tree:
         nodes.append(node.content)
         return nodes
 
-    def breadthPrint(self, node, nodes):
-        nodes.append(node.content)
-        for x in range(len(node.branches)):
-            nodes = self.breadthPrint(node.branches[x], nodes)
+    def breadthPrint(self, toVisit, nodes):
+        currentNode = toVisit.deQueue()
+
+        for x in range(len(currentNode.branches)):
+            nodes.append(currentNode.branches[x].content)
+            if len(currentNode.branches[x].branches) > 0:
+                toVisit.enQueue(currentNode.branches[x])
+
+        if toVisit.QueueSize() > 0:
+            self.breadthPrint(toVisit, nodes)
+
         return nodes
-
-
 
 folders = tree("Documents")
 folders.addNode("Documents", "Pictures", None)
@@ -74,6 +103,7 @@ folders.addNode("Documents Pictures", "Photo", None)
 folders.addNode("Documents", "Music", None)
 folders.addNode("Documents", "Code", None)
 folders.addNode("Documents Code", "PythonCode", None)
+folders.addNode("Documents Code PythonCode", "TreeProg", None)
 #print(folders.printTree("depth"))
-#print(folders.printTree("breadth"))
+print(folders.printTree("breadth"))
 nodeFound , path = folders.searchTree("depth", "Code")
