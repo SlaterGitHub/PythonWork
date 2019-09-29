@@ -40,7 +40,9 @@ class tree:
 
     def searchTree(self, searchType, nodeToFind):
         if searchType == "breadth":
-            return self.breadthSearch(nodeToFind, self.node, [])
+            toVisit = Queue()
+            toVisit.enQueue(self.node)
+            return self.breadthSearch(nodeToFind, toVisit, [])
         else:
             return self.depthSearch(nodeToFind, self.node, [])
 
@@ -66,6 +68,19 @@ class tree:
         if x == len(branches):
             return -1
         return x
+
+    def breadthSearch(self, nodeToFind, nodesToVisit, path):
+        currentNode = nodesToVisit.deQueue()
+        path.append(currentNode.content)
+        if currentNode.content == nodeToFind:
+            return True, path
+        for x in range(len(currentNode.branches)):
+            nodesToVisit.enQueue(currentNode.branches[x])
+        nodeFound, path = self.breadthSearch(nodeToFind, nodesToVisit, path)
+        if nodeFound == False:
+            del path[-1]
+
+        return nodeFound, path
 
     def printTree(self, printType):
         if printType == "breadth":
@@ -105,5 +120,6 @@ folders.addNode("Documents", "Code", None)
 folders.addNode("Documents Code", "PythonCode", None)
 folders.addNode("Documents Code PythonCode", "TreeProg", None)
 #print(folders.printTree("depth"))
-print(folders.printTree("breadth"))
-nodeFound , path = folders.searchTree("depth", "Code")
+#print(folders.printTree("breadth"))
+nodeFound , path = folders.searchTree("breadth", "TreeProg")
+print(path)
