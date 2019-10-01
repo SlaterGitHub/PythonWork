@@ -1,0 +1,2 @@
+currentContent = ""
+clipboard = Main.textFile("content.txt")<|>sleep(1)<|>entContent = ""<|>highlightedText != currentContent) and (highlightedText != ""):<|>

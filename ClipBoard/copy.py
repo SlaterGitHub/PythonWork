@@ -1,13 +1,19 @@
 import Main
-import pyautogui as pya
-import pyperclip
-import time
+import win32clipboard as CB
+from time import sleep
 
 def copy_clipboard():
-    pya.hotkey('ctrl', 'c')
-    time.sleep(.01)
-    return pyperclip.paste()
+    CB.OpenClipboard()
+    content =  CB.GetClipboardData()
+    CB.CloseClipboard()
+    return content
 
+currentContent = ""
 clipboard = Main.textFile("content.txt")
-highlightedText = copy_clipboard()
-clipboard.writeLine(highlightedText+"<|>")
+
+while True:
+    highlightedText = copy_clipboard()
+    if (highlightedText != currentContent) and (highlightedText != ""):
+        currentContent = highlightedText
+        clipboard.writeLine(highlightedText+"<|>")
+    sleep(1)
