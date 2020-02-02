@@ -1,6 +1,7 @@
 from Bit import Bit
 from Byte import Byte
 from ByteCoupler import ByteCoupler
+import logicGates
 
 def makeBit():
     return Bit(True)
@@ -37,8 +38,22 @@ def byteCouplerTest():
     print(coupler.OR())
     print(coupler.NOT())
 
+def logicTest():
+    primary = makeByte(6)
+    secondary = makeByte(3)
 
+    print("XOR")
+    print(logicGates.XOR(primary, secondary))
+    print("OR")
+    print(logicGates.OR(primary, secondary))
+    print("AND")
+    print(logicGates.AND(primary, secondary))
+    print("EQUIV")
+    print(logicGates.EQUIV(primary, secondary))
+    print("NOT")
+    print(logicGates.NOT(primary, secondary))
 
 #bitTest()
 #byteTest()
 #byteCouplerTest()
+#logicTest()
