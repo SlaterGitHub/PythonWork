@@ -8,6 +8,7 @@ class Transistor:
         self.connection = None
 
     def setSignal(self, bit):
+        self.pins["signal"].setStatus(bit)
         if(self.pud == bit):
             self.pins["output"].setStatus(self.pins["input"].getStatus())
         else:
@@ -22,7 +23,9 @@ class Transistor:
 
     def setInput(self, bit):
         self.pins["input"].setStatus(bit)
+        self.setSignal(self.pins["signal"])
         return self.pins["input"].getStatus()
 
     def setConnection(self, node):
         self.connection = node
+        self.setSignal(self.pins["signal"])

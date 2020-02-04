@@ -1,9 +1,12 @@
 class CPI:
-    def __init__(self, node):
-        self.power = True
-        self.connection = [node]
-        if node is not None:
-            node.setInput(self.power)
+    power = True
+
+    def __init__(self, *args):
+        if len(args) == 1:
+            self.connection = [args[0]]
+            self.connection.setInput(self.power)
+        else:
+            self.connection = []
 
     def setConnection(self, node):
         self.connection.append(node)
@@ -11,6 +14,5 @@ class CPI:
 
     def deleteConnection(self, node):
         if node in self.connection:
-            del connection[node]
-        node.setInput(False)
-        
+            self.connection.remove(node)
+        node.setInput(not self.power)
